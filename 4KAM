@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You've Got a Love Letter 💌</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+            margin: 0;
+        }
+
+        #envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background-color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #flap {
+            position: absolute;
+            top: 0;
+            width: 300px;
+            height: 100px;
+            background-color: #444;
+            border-bottom: 2px solid #222;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        #message {
+            display: none;
+            position: absolute;
+            top: 120px;
+            width: 100%;
+            text-align: center;
+            font-size: 1.2em;
+            color: white;
+        }
+
+        #envelope.open #flap {
+            transform: rotateX(180deg);
+        }
+
+        #envelope.open #message {
+            display: block;
+        }
+
+        .heart {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: orange;
+            clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 50% 81%, 19% 100%, 0% 38%);
+            animation: float 5s infinite;
+        }
+
+        .heart.blue {
+            background-color: blue;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-600px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div id="envelope" onclick="this.classList.toggle('open')">
+        <div id="flap"></div>
+        <div id="message">I love you so much Darling -NUR 💖</div>
+    </div>
+
+    <script>
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            if (i % 2 === 0) heart.classList.add('blue');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
