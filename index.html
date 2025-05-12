@@ -16,18 +16,12 @@
             position: relative;
         }
 
-        .heart-container {
-            position: relative;
-            width: 500px;
-            height: 500px;
-        }
-
         .envelope {
-            position: absolute;
-            width: 60px;
-            height: 40px;
+            position: relative;
+            width: 300px;
+            height: 200px;
             background-color: #e63946;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
         }
 
@@ -35,8 +29,8 @@
             content: '';
             position: absolute;
             top: 0;
-            width: 60px;
-            height: 20px;
+            width: 300px;
+            height: 100px;
             background-color: #d62828;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
@@ -53,6 +47,8 @@
             padding: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 10;
+            top: 220px;
+            left: 25px;
         }
 
         .floating-heart {
@@ -70,9 +66,14 @@
     </style>
 </head>
 <body>
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="heart-container">
+    <div class="envelope" onclick="revealMessage()">
     </div>
+
+    <div class="message-card" id="messageCard"></div>
 
     <script>
         const messages = [
@@ -92,32 +93,14 @@
             'Forever wouldn’t be long enough with you 💖'
         ];
 
-        const heartContainer = document.querySelector('.heart-container');
+        let currentMessage = 0;
 
-        const heartCoordinates = [
-            [250, 60], [200, 120], [300, 120], [150, 180], [350, 180],
-            [100, 240], [400, 240], [150, 300], [350, 300], [250, 360]
-        ];
-
-        messages.forEach((message, index) => {
-            const envelope = document.createElement('div');
-            envelope.classList.add('envelope');
-            envelope.style.left = heartCoordinates[index][0] + 'px';
-            envelope.style.top = heartCoordinates[index][1] + 'px';
-
-            const messageCard = document.createElement('div');
-            messageCard.classList.add('message-card');
-            messageCard.textContent = message;
-
-            envelope.addEventListener('click', () => {
-                messageCard.style.display = messageCard.style.display === 'block' ? 'none' : 'block';
-                messageCard.style.left = '120px';
-                messageCard.style.top = '175px';
-                heartContainer.appendChild(messageCard);
-            });
-
-            heartContainer.appendChild(envelope);
-        });
+        function revealMessage() {
+            const messageCard = document.getElementById('messageCard');
+            messageCard.textContent = messages[currentMessage];
+            messageCard.style.display = 'block';
+            currentMessage = (currentMessage + 1) % messages.length;
+        }
 
         for (let i = 0; i < 30; i++) {
             const heart = document.createElement('div');
