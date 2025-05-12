@@ -13,24 +13,32 @@
             background-color: #ffe4e1;
             margin: 0;
             overflow: hidden;
+            position: relative;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            clip-path: polygon(50% 0%, 100% 38%, 81% 100%, 50% 81%, 19% 100%, 0% 38%);
+            background-color: transparent;
         }
 
         .envelope {
             position: absolute;
-            width: 100px;
-            height: 60px;
+            width: 60px;
+            height: 40px;
             background-color: #e63946;
             border-radius: 5px;
             cursor: pointer;
-            transform: rotate(Math.random() * 20 - 10 + 'deg');
         }
 
         .envelope::after {
             content: '';
             position: absolute;
             top: 0;
-            width: 100px;
-            height: 30px;
+            width: 60px;
+            height: 20px;
             background-color: #d62828;
             clip-path: polygon(0 0, 100% 0, 50% 100%);
         }
@@ -41,16 +49,22 @@
             width: 250px;
             height: auto;
             background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #d62828;
+            border-radius: 10px;
             text-align: center;
             padding: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
 
-        audio {
-            display: none;
+        @keyframes sparkle {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .sparkle {
+            animation: sparkle 0.5s ease-out;
         }
 
     </style>
@@ -59,6 +73,9 @@
     <audio autoplay loop>
         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
+
+    <div class="heart-container">
+    </div>
 
     <script>
         const messages = [
@@ -78,23 +95,31 @@
             'Forever wouldn’t be long enough with you 💖'
         ];
 
-        for (let i = 0; i < messages.length; i++) {
+        const heartContainer = document.querySelector('.heart-container');
+
+        messages.forEach((message, index) => {
             const envelope = document.createElement('div');
             envelope.classList.add('envelope');
-            envelope.style.left = Math.random() * 90 + 'vw';
-            envelope.style.top = Math.random() * 90 + 'vh';
+
+            const angle = (360 / messages.length) * index;
+            const radius = 150;
+            envelope.style.left = 200 + radius * Math.cos(angle * Math.PI / 180) - 30 + 'px';
+            envelope.style.top = 200 + radius * Math.sin(angle * Math.PI / 180) - 20 + 'px';
 
             const messageCard = document.createElement('div');
             messageCard.classList.add('message-card');
-            messageCard.textContent = messages[i];
+            messageCard.textContent = message;
 
             envelope.addEventListener('click', () => {
+                messageCard.classList.toggle('sparkle');
                 messageCard.style.display = messageCard.style.display === 'block' ? 'none' : 'block';
+                messageCard.style.left = '75px';
+                messageCard.style.top = '175px';
+                heartContainer.appendChild(messageCard);
             });
 
-            document.body.appendChild(envelope);
-            document.body.appendChild(messageCard);
-        }
+            heartContainer.appendChild(envelope);
+        });
     </script>
 </body>
 </html>
