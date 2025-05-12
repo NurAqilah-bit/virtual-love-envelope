@@ -23,6 +23,11 @@
             background-color: #e63946;
             border-radius: 10px;
             cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .envelope:hover {
+            transform: scale(1.05);
         }
 
         .envelope::after {
@@ -36,7 +41,6 @@
         }
 
         .message-card {
-            display: none;
             position: absolute;
             width: 250px;
             height: auto;
@@ -47,8 +51,12 @@
             padding: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             z-index: 10;
-            top: 220px;
-            left: 25px;
+            animation: appear 0.4s ease-out;
+        }
+
+        @keyframes appear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .floating-heart {
@@ -73,8 +81,6 @@
     <div class="envelope" onclick="revealMessage()">
     </div>
 
-    <div class="message-card" id="messageCard"></div>
-
     <script>
         const messages = [
             'I love you so much my Darling KAM - sincerely from NUR 💖',
@@ -93,13 +99,16 @@
             'Forever wouldn’t be long enough with you 💖'
         ];
 
-        let currentMessage = 0;
-
         function revealMessage() {
-            const messageCard = document.getElementById('messageCard');
-            messageCard.textContent = messages[currentMessage];
-            messageCard.style.display = 'block';
-            currentMessage = (currentMessage + 1) % messages.length;
+            const messageCard = document.createElement('div');
+            messageCard.classList.add('message-card');
+            messageCard.textContent = messages[Math.floor(Math.random() * messages.length)];
+            messageCard.style.left = Math.random() * 70 + 'vw';
+            messageCard.style.top = Math.random() * 70 + 'vh';
+            document.body.appendChild(messageCard);
+            setTimeout(() => {
+                messageCard.remove();
+            }, 5000);
         }
 
         for (let i = 0; i < 30; i++) {
