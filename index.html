@@ -102,15 +102,29 @@
             'I’m so lucky to have you by my side ✨',
             'You make my heart smile every single day 😊💖',
             'Just a reminder: I love you more than words can say 😘',
-            'I wouldn’t trade our moments for anything else in the world 🌌❤️'
+            'I wouldn’t trade our moments for anything else in the world 🌌❤️',
+            'You are my sunshine on a rainy day ☀️🌧️',
+            'When I think of you, I feel warmth in my heart ❤️',
+            'I can’t wait to make more memories with you 💖',
+            'You are my greatest blessing ✨❤️',
+            'I’m happiest when I’m with you 🥰',
+            'Loving you is my favorite thing to do 💞',
+            'Forever wouldn’t be long enough with you 💖'
         ];
 
         const messageDiv = document.getElementById('message');
 
         document.getElementById('envelope').addEventListener('click', () => {
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            messageDiv.textContent = randomMessage;
+            messageDiv.style.opacity = '0';
+            setTimeout(() => {
+                messageDiv.textContent = randomMessage;
+                messageDiv.style.opacity = '1';
+            }, 300);
         });
     </script>
+    <audio id="bgMusic" loop autoplay>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>
