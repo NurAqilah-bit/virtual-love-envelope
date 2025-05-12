@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f3f4f6;
+            background-color: #ffe4e1;
             margin: 0;
             overflow: hidden;
         }
@@ -22,8 +22,7 @@
             background-color: #e63946;
             border-radius: 5px;
             cursor: pointer;
-            transform: rotate("+
-            "Math.random() * 20 - 10 + 'deg');
+            transform: rotate(Math.random() * 20 - 10 + 'deg');
         }
 
         .envelope::after {
@@ -39,19 +38,28 @@
         .message-card {
             display: none;
             position: absolute;
-            width: 200px;
-            height: 150px;
+            width: 250px;
+            height: auto;
             background-color: white;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             z-index: 10;
         }
+
+        audio {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
+    <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         const messages = [
             'I love you so much my Darling KAM - sincerely from NUR 💖',
