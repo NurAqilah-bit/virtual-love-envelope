@@ -83,7 +83,7 @@
 <body>
     <div id="envelope" onclick="this.classList.toggle('open')">
         <div id="flap"></div>
-        <div id="message">I love you so much my Darling KAM -sincerely from NUR 💖</div>
+        <div id="message"></div>
     </div>
 
     <script>
@@ -95,6 +95,22 @@
             heart.style.animationDuration = 5 + Math.random() * 3 + 's';
             document.body.appendChild(heart);
         }
+    const messages = [
+            'I love you so much my Darling KAM - sincerely from NUR 💖',
+            'You are my favorite person in the whole world 🌎❤️',
+            'Every day with you is a beautiful adventure 💑',
+            'I’m so lucky to have you by my side ✨',
+            'You make my heart smile every single day 😊💖',
+            'Just a reminder: I love you more than words can say 😘',
+            'I wouldn’t trade our moments for anything else in the world 🌌❤️'
+        ];
+
+        const messageDiv = document.getElementById('message');
+
+        document.getElementById('envelope').addEventListener('click', () => {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            messageDiv.textContent = randomMessage;
+        });
     </script>
 </body>
 </html>
