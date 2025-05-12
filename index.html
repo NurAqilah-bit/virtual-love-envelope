@@ -74,12 +74,16 @@
     </style>
 </head>
 <body>
-    <audio autoplay loop>
+    <audio id='background-music' autoplay loop>
+        <source src='https://www.bensound.com/bensound-music/bensound-love.mp3' type='audio/mpeg'>
+    </audio>
         <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
     </audio>
 
     <div class="envelope" onclick="revealMessage()">
     </div>
+
+    <button onclick="toggleMusic()" style="position: absolute; bottom: 20px; right: 20px; padding: 10px 15px; border: none; background-color: #e63946; color: white; border-radius: 5px; cursor: pointer;">🔊 Toggle Music</button>
 
     <script>
         const messages = [
@@ -118,6 +122,14 @@
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = 3 + Math.random() * 3 + 's';
             document.body.appendChild(heart);
+        }
+    function toggleMusic() {
+            const music = document.getElementById('background-music');
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
         }
     </script>
 </body>
